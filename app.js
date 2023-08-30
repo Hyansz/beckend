@@ -10,7 +10,7 @@ const app = express();
  */
 
 app.get('/', (req, res) => {
-    
+    res.send('Hello Everyone!')
 })
 
 // Cara Running
@@ -18,5 +18,5 @@ app.listen(3000, () => {
     console.log('Hai Bro, Your Server Have Running in http://localhost:3000');
 })
 
-// Jalannya dengan menulis node app.js di terminal
+// Jalannya dengan menulis `node app.js` di terminal
 // Mematikan server dengan `ctrl+c`
