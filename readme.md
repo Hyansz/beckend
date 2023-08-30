@@ -8,3 +8,11 @@
 6. Jalankan git add .
 7. Jalankan git commit -m "pesan"
 8. Jalankan git push -u origin branch
+
+## Optional / Saran
+
+- Menghapus file
+`git rm namafile.txt`
+
+- Menghapus folder
+`git rm namafolder`
