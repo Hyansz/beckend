@@ -13,6 +13,18 @@ app.get('/', (req, res) => {
     res.send('Hello Everyone!')
 })
 
+app.post('/', (req, res) => {
+    res.send('post data!')
+})
+
+app.put('/', (req, res) => {
+    res.send('update data!')
+})
+
+app.delete('/', (req, res) => {
+    res.send('delete data!')
+})
+
 // Cara Running
 app.listen(3000, () => {
     console.log('Hai Bro, Your Server Have Running in http://localhost:3000');
