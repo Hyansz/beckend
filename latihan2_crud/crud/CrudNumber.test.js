@@ -1,0 +1,38 @@
+const { createData, readAll, readByIndex, updateData, deleteData } = require("./CrudNumber")
+
+describe('test crud number', () => {
+    test('when create should success', () => {
+        let bank = []
+        let result = createData(bank, 5)
+
+        expect(result).toEqual([5])
+    })
+
+    test('when readAll should success', () => {
+        let bank = [3, 4, 5]
+        let result = readAll(bank)
+
+        expect(result).toEqual([3, 4, 5])
+    })
+
+    test('when readByIndex should success', () => {
+        let bank = [3, 4, 5]
+        let result = readByIndex(bank, 2)
+
+        expect(result).toEqual(5)
+    })
+
+    test('when updateData should success', () => {
+        let bank = [3, 4, 5]
+        let result = updateData(bank, 1, 8)
+
+        expect(result).toEqual([3, 8, 5])
+    })
+
+    test('when deleteData should success', () => {
+        let bank = [2, 3, 4, 5]
+        let result = deleteData(bank, 2)
+
+        expect(result).toEqual([2, 3, 5])
+    })
+})
