@@ -15,7 +15,8 @@ app.get('/', (req, res) => {
 
 // Cara Running
 app.listen(3000, () => {
-    console.log('Hai Bro, Your Server Have Running in localhost:3000');
+    console.log('Hai Bro, Your Server Have Running in http://localhost:3000');
 })
 
 // Jalannya dengan menulis node app.js di terminal
+// Mematikan server dengan `ctrl+c`
