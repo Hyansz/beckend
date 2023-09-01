@@ -1,3 +1,15 @@
+const { 
+    getLargestNumber, 
+    filterEvenNumbers, 
+    sumArray, 
+    findDuplicates, 
+    sortArray, 
+    concatenateArrays, 
+    calculateAverage, 
+    allPositive, 
+    removeDuplicates, 
+    findIndexOf } = require('./latihan-array');
+
 describe('Array Operation', () => {
     test('1. Menemukan angka terbesar dalam array', () => {
         expect(getLargestNumber([5, 8, 2, 10, 3])).toBe(10)
@@ -32,7 +44,7 @@ describe('Array Operation', () => {
     })
 
     test('9. Menghapus nilai-nilai duplikat dari array', () => {
-        expect(removeDuplicates([1, 2, 3, 2, 4, 5, 5])).toEqual([1, 2, 3, 2, 4, 5])
+        expect(removeDuplicates([1, 2, 3, 2, 4, 5, 5])).toEqual([1, 2, 3, 4, 5])
     })
 
     test('10. Mencari index pertama dari angka tertentu dalam array', () => {
