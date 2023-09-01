@@ -9,12 +9,16 @@ const app = express();
  * contoh seperti data, json, html, dan codeHTTP (default:200)
  */
 
+app.use(express.json())
+
 app.get('/', (req, res) => {
     res.send('Hello Everyone!')
 })
 
 app.post('/', (req, res) => {
-    res.send('post data!')
+    let name = req.body.name;
+
+    res.send("Assalamu'alaikum " + name)
 })
 
 app.put('/', (req, res) => {
