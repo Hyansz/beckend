@@ -26,6 +26,10 @@ const ageValidation = (age) => {
         return { error: true, message: 'umur harus kurang dari 80'}
     }
 
+    if(age != true) {
+        return { error: false, message: 'Confirm', data: age }
+    }
+
 }
 
 module.exports = { nameValidation, ageValidation }
