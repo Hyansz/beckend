@@ -16,7 +16,7 @@ const nameValidation = (name) => {
     return { error: false, message: 'OK', data: name }
 }
 
-const ageValidation = (age) => {
+const ageValid = (age) => {
 
     if(age <= 12) {
         return { error: true, message: 'umur harus lebih dari 12'}
@@ -32,4 +32,4 @@ const ageValidation = (age) => {
 
 }
 
-module.exports = { nameValidation, ageValidation }
+module.exports = { nameValidation, ageValid }
