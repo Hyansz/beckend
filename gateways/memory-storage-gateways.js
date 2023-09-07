@@ -25,4 +25,4 @@ const removeData = (id) => {
     return dataMemory;
 }
 
-module.exports = {savingData, showAllData, editDataName, removeData, getDataByName};
+module.exports = { savingData, showAllData, editDataName, removeData, getDataByName };
