@@ -1,31 +1,78 @@
-const { createData, readByIndex, updateData, deleteData } = require("./CrudNumber")
+const {
+    createData,
+    addObj,
+    findData,
+    updateData,
+    deleteData,
+    findByname
+} = require("./CrudObject");
 
-describe('test CrudString', () => {
-    test('when create should success', () => {
-        let bank = []
-        let result = createData(bank, 'apple')
+describe("test Crud Objects", () => {
+    test("when create new object should success", () => {
+        let bank = [];
+        let result = createData(bank, { id: 1, name: "samsul" });
 
-        expect(result).toEqual(['apple'])
-    })
+        // menampilkan seluruh data
+        expect(result).toEqual([{ id: 1, name: "samsul" }]);
+    });
 
-    test('when readByIndex should success', () => {
-        let bank = ['apple', 'mango', 'orange']
-        let result = readByIndex(bank, 1)
+    test("when add new object should success", () => {
+        let bank = [{ id: 1, name: "samsul" }];
+        let result = addObj(bank, { id: 2, name: "bambang" });
 
-        expect(result).toEqual('mango')
-    })
+        // menampilkan seluruh data
+        expect(result).toEqual([
+            { id: 1, name: "samsul" },
+            { id: 2, name: "bambang" },
+        ]);
+    });
 
-    test('when updateData should success', () => {
-        let bank = ['apple', 'mango', 'orange']
-        let result = updateData(bank, 2, 'pear')
+    test("when find a object should success", () => {
+        let bank = [
+            { id: 1, name: "samsul" },
+            { id: 2, name: "bambang" },
+        ];
+        let result = findData(bank, 2); // menggunakan dataArray.find((value)=>value.id == id)
 
-        expect(result).toEqual(['apple', 'mango', 'pear'])
-    })
+        // menampilkan hanya object yang dibutuhkan
+        expect(result).toEqual({ id: 2, name: "bambang" });
+    });
 
-    test('when deleteData should success', () => {
-        let bank = ['apple', 'mango', 'orange']
-        let result = deleteData(bank, 0)
+    test("when update data should success", () => {
+        let bank = [
+            { id: 1, name: "samsul" },
+            { id: 2, name: "bambang" },
+        ];
 
-        expect(result).toEqual(['mango', 'orange'])
-    })
-})
+        // mengubah ID 1 dengan nama Arifin
+        // menggunakan objectArray.findByIdx((value)=>value.id === id)
+        let result = updateData(bank, 1, "arifin");
+        expect(result).toEqual([
+            { id: 1, name: "samsul" },
+            { id: 2, name: "bambang" },
+        ]);
+    });
+
+    test("when delete data should success", () => {
+        let bank = [
+            { id: 1, name: "samsul" },
+            { id: 2, name: "bambang" },
+        ];
+
+        // menghapus ID 2
+        // menggunakan objectArray.findIndex((value)=>value.id == id)
+        let result = deleteData(bank, 1);
+        expect(result).toEqual([{ id: 2, name: "bambang" }]);
+    });
+
+    test("when find a object by name should success", () => {
+        let bank = [
+            { id: 1, name: "samsul" },
+            { id: 2, name: "bambang" },
+        ];
+        let result = findByname(bank, 'samsul'); // menggunakan dataArray.find((value)=>value.id == id)
+
+        // menampilkan hanya object yang dibutuhkan
+        expect(result).toEqual({ id: 1, name: "samsul" });
+    });
+});

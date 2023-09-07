@@ -1,32 +1,31 @@
 const express = require('express');
 const { postDataUserHandler } = require('./handlers/post-data-user-handler');
-const { putDataUserHandler } = require('./handlers/put-data-user-handler');
-const { deleteDataUserHandler } = require('./handlers/delete-data-user-handler');
 const { getDataUserHandler } = require('./handlers/get-data-user-handler');
-
+const { putDataUserHandler } = require('./handlers/put-data-user-handler');
+const { delDataUserHandler } = require('./handlers/del-data-user-handler');
 const app = express();
 
-// contoh simple sederhana
-/**
- *  req adalah singaktan dari request yang isinya dikirim oleh client.
- * res adalah singaktan dari response yang isinya kita kirim ke client
- * contoh seperti data, json, html, dan codeHTTP (default:200)
- */
+// Example
+/*
+    - req = singkatan dari request. Yang isinya yang dikirimkan oleh client. Contoh seperti body, parameter, query
+    - res = singkatan dari response. Yang isinya kita kirim ke client. Contoh seperti data, json, html, dan codeHTTP (default:200)
+*/
 
-app.use(express.json())
+app.use(express.json());
 
-app.get('/', getDataUserHandler)
+app.get('/', getDataUserHandler);
 
 app.post('/', postDataUserHandler);
 
-app.put('/', putDataUserHandler)
+app.put('/', putDataUserHandler);
 
-app.delete('/', deleteDataUserHandler)
+app.delete('/', delDataUserHandler);
 
-// Cara Running
-app.listen(3000, () => {
-    console.log('Hai Bro, Your Server Have Running in http://localhost:3000');
-})
+// Untuk running
+const server = app.listen(3000, () => {
+    console.log("Halo cuyy, Server sudah jalan di https://localhost:3000")
+});
 
-// Jalannya dengan menulis `node app.js` di terminal
-// Mematikan server dengan `ctrl+c`
+module.exports = server;
+
+// Untuk menjalankan ketik node app.js di terminal. Untuk cancel tekan Ctr + c.
