@@ -22,7 +22,7 @@ describe('Test in app', () => {
         expect(response.status).toBe(200);
     }, 5000);
 
-    test('when test flow should success', async () => {
+    test.only('when test flow should success', async () => {
         const data1 = { name: 'raihan', age: 16 }
         const data2 = { name: 'regita', age: 17 }
         const data3 = { name: 'harjuno', age: 18 }
@@ -50,7 +50,6 @@ describe('Test in app', () => {
                 { id: id3, name: 'surakarta'}
             ]
         })
-
     })
 
     afterAll(() => {

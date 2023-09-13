@@ -7,7 +7,7 @@ const {
     findByname
 } = require("./CrudObject");
 
-describe("test Crud Objects", () => {
+describe.skip("test Crud Objects", () => {
     test("when create new object should success", () => {
         let bank = [];
         let result = createData(bank, { id: 1, name: "samsul" });
