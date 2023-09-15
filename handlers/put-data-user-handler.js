@@ -3,9 +3,11 @@ const { editDataName } = require("../gateways/memory-storage-gateways");
 const putDataUserHandler = (req, res) => {
     let name = req.body.name;
     let id = req.body.id;
-    editDataName(id, name)
+    let age = req.body.age;
 
-    res.send({error:false, message:"Succes"})
-}
+    editDataName(id, name, age);
 
-module.exports = { putDataUserHandler }
+    res.send({ error: false, message: 'Succes' });
+};
+
+module.exports = { putDataUserHandler };

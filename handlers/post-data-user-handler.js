@@ -1,35 +1,41 @@
 const { showAllData, savingData } = require('../gateways/memory-storage-gateways');
-const { nameValidation, ageValid } = require('../validation/project/validation')
+const { nameValidation, ageValidation } = require('../validation/project/validation')
 
-const postDataUserHandler = (req,res) => {
-    if(!req.body.name) {
-        res.status(400)
-        return res.send({error:true, message:'tidak memiliki parameter nama'});
-    };
+const postDataUserHandler = (req, res) => {
+    // mengecek property name
+    if (!req.body.name) {
+        res.status(400);
+        return res.send({ error: true, message: 'tidak memiliki paramater nama' });
+    }
+    // @todo pengecekan property umur
+    if (!req.body.age) {
+        res.status(400);
+        return res.send({ error: true, message: 'tidak memiliki paramater umur' });
+    }
 
-    if(!req.body.age) {
-        res.status(400)
-        return res.send({error:true, message:'tidak memiliki parameter umur'});
-    };
+    // mengambil data nama
+    // let name = req.body.name; // mengambil data name
+    let { name, age } = req.body;
+    // @todo pemanggilan data umur
 
-    let {name, age} = req.body;
-
-    // Mengambil data nama
+    // melakukan validasi nama
     let realNameRes = nameValidation(name);
-    let realAgeRes = ageValid(age);
+    let realAgeRes = ageValidation(age);
+    // @todo melakukan validasi umur
 
-    if(realNameRes.error) {
-        res.status(400)
-        return res.send(realNameRes)
-    };
+    if (realNameRes.error) {
+        res.status(400);
+        return res.send(realNameRes);
+    }
+    // @todo lempar error umur
+    if (realAgeRes.error) {
+        res.status(400);
+        return res.send(realAgeRes);
+    }
 
-    if(realAgeRes.error) {
-        res.status(400)
-        return res.send(realAgeRes)
-    };
+    savingData(realNameRes.data, realAgeRes.data); // simpan data di memori (memoryGateway)
 
-    savingData(realNameRes.data, realAgeRes.data) // simpan data di memori (memoriGateway)
-    res.send({data: showAllData()});
+    res.send({ data: showAllData() }); // @todo menambahkan data umur yg sudah divalidasi
 };
 
-module.exports = {postDataUserHandler}
+module.exports = { postDataUserHandler };

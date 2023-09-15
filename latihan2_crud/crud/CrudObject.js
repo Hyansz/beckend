@@ -1,27 +1,41 @@
-const createData = (nama, data) => {
-    nama.push(data)
+const createData = (bank, data) => {
+    bank.push(data);
+    return bank;
+};
 
-    return nama
-}
+const findById = (bank, id) => {
+    return bank.find((value) => value.id === id);
+};
 
-const findById = (cari, id) => {
-    return cari.find((value) => value.id === id)
-}
+const findByName = (bank, name) => {
+    return bank.find((value) => value.name.includes(name));
+};
 
-const updateData = (data, id, value) => {
-    const index = data.findIndex((value) => value.id === id)
-    
-    data[index] = {id, name: value}
+const updateData = (bank, id, value, num) => {
+    // mencari index [0,1,2,...]
+    if (typeof id === 'string') {
+        id = parseInt(id);
+    }
 
-    return data
-}
+    const index = bank.findIndex((value, num) => value.id || num.id === id);
 
-const deleteData = (data, id) => {
-    const index = data.findIndex((value) => value.id === id)
-    
-    data.splice(index, 1)
+    // mengubah data berdasarkan id
+    bank[index] = { ...bank[index], ...id, name: value, age: num };
 
-    return data
-}
 
-module.exports = { createData, findById, updateData, deleteData }
+    // mengembalikan seluruh data yg telah diubah
+    return bank;
+};
+
+const deleteData = (bank, id) => {
+    const index = bank.findIndex((value) => {
+        return value.id === id;
+    });
+
+    console.log('5. index', index);
+
+    bank.splice(index, 1);
+    return bank;
+};
+
+module.exports = { createData, findById, updateData, deleteData, findByName };

@@ -1,7 +1,7 @@
 const { showAllData } = require("../gateways/memory-storage-gateways")
 
 const getDataUserHandler = (req, res) => {
-    res.send({data : showAllData()})
-}
+    res.send({ data: showAllData() });
+};
 
-module.exports = { getDataUserHandler }
+module.exports = { getDataUserHandler };

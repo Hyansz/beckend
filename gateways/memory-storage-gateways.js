@@ -3,8 +3,8 @@ const { createData, updateData, deleteData, findByname } = require("../latihan2_
 let dataMemory = [];
 
 const savingData = (name, age) => {
-    let id = Math.ceil(Math.random() * 1000)
-    dataMemory = createData(dataMemory, {id, name, age});
+    let id = Math.ceil(Math.random() * 1000);
+    dataMemory = createData(dataMemory, { id, name, age });
 };
 
 const showAllData = () => {
@@ -12,17 +12,31 @@ const showAllData = () => {
 };
 
 const getDataByName = (name) => {
-    return findByname(dataMemory, name)
-}
+    return findByname(dataMemory, name);
+};
 
-const editDataName = (id,name) => {
-    dataMemory = updateData(dataMemory, id, name)
+const editDataName = (id,name,age) => {
+    dataMemory = updateData(dataMemory, id, name, age)
+    
     return dataMemory;
 }
 
 const removeData = (id) => {
-    dataMemory = deleteData(dataMemory, id);
-    return dataMemory;
-}
+    console.log('4. id',id);
 
-module.exports = { savingData, showAllData, editDataName, removeData, getDataByName };
+    if (typeof id === 'string') {
+        id = parseInt(id);
+    }
+    
+    dataMemory = deleteData(dataMemory, id);
+
+    return dataMemory;
+};
+
+module.exports = {
+    savingData,
+    showAllData,
+    editDataName,
+    removeData,
+    getDataByName,
+};

@@ -1,33 +1,38 @@
-const express = require('express');
-const { postDataUserHandler } = require('./handlers/post-data-user-handler');
-const { getDataUserHandler } = require('./handlers/get-data-user-handler');
-const { putDataUserHandler } = require('./handlers/put-data-user-handler');
-const { delDataUserHandler } = require('./handlers/del-data-user-handler');
+const express = require("express");
+const { postDataUserHandler } = require("./handlers/post-data-user-handler");
+const { getDataUserHandler } = require("./handlers/get-data-user-handler");
+const { putDataUserHandler } = require("./handlers/put-data-user-handler");
+const { deleteDataUserHandler } = require("./handlers/delete-data-user-handler");
+
 const app = express();
 
-// Example
-/*
-    - req = singkatan dari request. Yang isinya yang dikirimkan oleh client. Contoh seperti body, parameter, query
-    - res = singkatan dari response. Yang isinya kita kirim ke client. Contoh seperti data, json, html, dan codeHTTP (default:200)
-*/
+app.use(express.static('public'));
 
-app.use(express.json());
+app.use(express.json()); // agar support json
+/**
+ * req adalah singkatan dari request yg isi yg dikirimkan oleh client.
+ * contoh seperti body, parameter, query
+ * res adalah singkatan dari responss yang isinya kita kirim ke client.
+ * contoh seperti data, json, html, dan codeHTTP (default:200)
+ */
+app.get("/api/user", getDataUserHandler);
 
-app.get('/', getDataUserHandler);
+// membuat data
+app.post("/api/user", postDataUserHandler);
 
-app.post('/', postDataUserHandler);
+// update data
+app.put("/api/user", putDataUserHandler);
 
-app.put('/', putDataUserHandler);
+// hapus data
+app.delete("/api/user", deleteDataUserHandler);
 
-app.delete('/', delDataUserHandler);
-
-// Untuk running
+// biar bisa running
 const port = 3001;
 
 const server = app.listen(port, () => {
-    console.log("Halo cuyy, Server sudah jalan di https://localhost:")
+  console.log("Hai Bro, Servermu udah jalan di http://localhost:" + port); // IP:127.0.0.1 -> domain=> localhost
 });
+// jalaninnya dengan menulis node app.js di terminal
+// matikan server dengan ctrl+c
 
 module.exports = server;
-
-// Untuk menjalankan ketik node app.js di terminal. Untuk cancel tekan Ctr + c.

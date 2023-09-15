@@ -1,58 +1,64 @@
-const request= require('supertest')
-const app = require('./app')
+const request = require('supertest');
+const app = require('./app');
 
 describe('Test in app', () => {
-    test('When get root should succes', async () => {
-        let response = await request(app).get('/');
-        expect(response.status).toBe(200); //=== / '5' === '5' => false
-        expect(response.body).toEqual({data: []}); //=== / '5' == '5' => true
-    }, 5000);
+test('when get root should success', async () => {
+    let response = await request(app).get('/api/user');
 
-    test('When post root should succes', async () => {
-        const data = {name:'Raihan', age:16}
-        let response = await request(app).post('/').send(data);
-        expect(response.status).toBe(200); 
-        expect(response.body.data[0].name).toEqual('Raihan');
-        expect(response.body.data[0].age).toEqual(16);
-        expect(typeof response.body.data[0].id).toBe('number');
-    }, 5000);
+    expect(response.status).toBe(200); // ===
+    // '5' === 5 => false
+    expect(response.body).toEqual({ data: [] }); // ==
+    // '5' == 5 => true
+}, 5000);
 
-    test('When put root should succes', async () => {
-        let response = await request(app).put('/');
-        expect(response.status).toBe(200);
-    }, 5000);
+test('when post data should success', async () => {
+    const data = { name: 'raihan', age: 23 };
+    let response = await request(app).post('/api/user').send(data);
 
-    test.only('when test flow should success', async () => {
-        const data1 = { name: 'raihan', age: 16 }
-        const data2 = { name: 'regita', age: 17 }
-        const data3 = { name: 'harjuno', age: 18 }
+    expect(response.status).toBe(200);
 
-        await request(app).post('/').send(data1)
-        await request(app).post('/').send(data2)
-        await request(app).post('/').send(data3)
+    expect(response.body.data[0].name).toBe('raihan');
+    expect(response.body.data[0].age).toBe(23);
+    expect(typeof response.body.data[0].id).toBe('number');
+});
 
-        let response = await request(app).get('/')
+test('when test flow should success', async () => {
+    // masukkan semua data
+    const data1 = { name: 'raihan', age: 23 };
+    const data2 = { name: 'regita', age: 30 };
+    const data3 = { name: 'harjuno', age: 20 };
 
-        let id1 = response.body.data[0].id
-        let id2 = response.body.data[1].id
-        let id3 = response.body.data[2].id
+    await request(app).post('/api/user').send(data1);
+    await request(app).post('/api/user').send(data2);
+    await request(app).post('/api/user').send(data3);
 
-        const newData = { id: id3, name: 'surakarta'}
-        await request(app).put('/').send(newData)
+    // ambil id (random)
+    let response = await request(app).get('/api/user');
 
-        await request(app).delete('/').send({ id: id2 })
+    let id1 = response.body.data[0].id;
+    let id2 = response.body.data[1].id;
+    let id3 = response.body.data[2].id;
 
-        let response2 = await request(app).get('/')
+    // ubah data
+    const newData = { id: id3, name: 'surakarta' };
+    await request(app).put('/api/user').send(newData);
 
-        expect(response2.body).toEqual({
-            data: [
-                { id: id1, name: 'raihan', age: 16 },
-                { id: id3, name: 'surakarta'}
-            ]
-        })
-    })
+    // hapus data
+    await request(app).delete('/api/user').send({ id: id2 });
+
+    // ambil data terbaru
+    let response2 = await request(app).get('/api/user');
+
+    // cocokkan
+    expect(response2.body).toEqual({
+        data: [
+            { id: id1, name: 'raihan', age: 23 },
+            { id: id3, name: 'surakarta' },
+        ],
+    });
+});
 
     afterAll(() => {
-        app.close();
+        app.close(); // Menutup server setelah semua tes selesai
     });
 });
